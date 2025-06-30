@@ -18,7 +18,6 @@ CREATE TABLE members (  -- 테이블 명: memebers 생성
     name VARCHAR(30) NOT NULL,  -- 이름(필수 입력)
     email VARCHAR(100) UNIQUE,  -- 이메일(중복 불가능) 
     join_date DATE DEFAULT(CURRENT_DATE)  -- 가입일(기본값-오늘)
-    
 );
 
 SHOW TABLES;
