@@ -47,3 +47,4 @@ SELECT * FROM userinfo WHERE
 (nickname LIKE '김%' OR
 nickname LIKE '이%') 
 AND email LIKE '%gmail.com';
+
