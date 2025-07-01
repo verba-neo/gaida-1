@@ -35,13 +35,21 @@ SELECT
 FROM dt_demo;
 
 -- 문자열 치환
-SELECT REPLACE('a@test.com', 'test.com', 'gmail.com');
+SELECT REPLACE('a@test.com', 'a', 'A');
 SELECT 
 	description,
     REPLACE(description, '학생', '**') AS secret
 FROM dt_demo;
 
-	
+-- 동적 추출 (원하는 글자의 위치를 확인 후 그 이전/이후를 추출하기
+SELECT LOCATE('@', 'username@gmail.com');  -- username@gmail.com 에서 @이 등장하는 순서(숫자)
 
+SELECT
+  description,
+  SUBSTRING(description, 1, LOCATE('학생', description) - 1) AS '학생설명'
+FROM dt_demo;
+
+-- 공백 없애기
+SELECT TRIM('    what??     ');
 
 
