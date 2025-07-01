@@ -40,27 +40,15 @@ SELECT * FROM students WHERE age BETWEEN 20 AND 40;  -- 20 이상, 40 이하
 
 SELECT * FROM students WHERE id IN (1, 3, 5, 7);
 
+-- 문자열 패턴 LIKE (% -> 있을수도, 없을수도 있다. _ -> 정확히 개수만큼 글자가 있다.)
+-- 이 씨만 찾기
+SELECT * FROM students WHERE name LIKE '이%';
+-- '창' 글자가 들어가는 사람
+SELECT * FROM students WHERE name LIKE '%창%';
+-- '창' 으로 시작만 하면 됨
+SELECT * FROM students WHERE name LIKE '창%';
+-- '창' 으로 끝나기만 하면 됨
+SELECT * FROM students WHERE name LIKE '%창';
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+-- 이름이 정확히 3글자인 유씨
+SELECT * FROM students WHERE name LIKE '유 __';
