@@ -35,12 +35,15 @@ SELECT
     COUNT(*) AS 사원별판매건수,
 	COUNT(DISTINCT customer_id) AS 사원별고객수,
     SUM(total_amount) AS 사원별총매출,
-    ?? AS 활동개월수,
-	   AS 월평균매출
+    COUNT(DISTINCT DATE_FORMAT(order_date, '%Y-%m')) AS 활동개월수,
+    ROUND(
+		SUM(total_amount) / COUNT(DISTINCT DATE_FORMAT(order_date, '%Y-%m'))
+	) AS 월평균매출
 FROM sales
 GROUP BY sales_rep
-HAVING ??
-ORDER BY ??;
+HAVING 월평균매출 >= 5 * power(10, 5)
+ORDER BY 월평균매출 DESC;
+-- ORDER BY ??;
 
 
 
