@@ -1,6 +1,6 @@
 -- p07.sql
 USE practice;
-
+-- lecture db의 dt_demo 테이블을 현재(practice) DB에 dt_demo2 로 복제해옴.
 CREATE TABLE dt_demo2 AS SELECT * FROM lecture.dt_demo;
 
 SELECT * FROM dt_demo2;
