@@ -9,16 +9,17 @@ SELECT * FROM dt_demo2;
 
 -- 종합 정보 표시
 SELECT
-	id, -- id
+  id, -- id
 	name, -- name
-    -- 닉네임 (NULL -> '미설정')
+  -- 닉네임 (NULL -> '미설정')
 	IFNULL(nickname, '미설정') AS 닉네임,
 	-- 출생년도 (19xx년생)
-    DATE_FORMAT(birth, '%Y년생') AS 출생년도,
+  DATE_FORMAT(birth, '%Y년생') AS 출생년도,
 	-- 나이 (TIMESTAMPDIFF 로 나이만 표시)
-    TIMESTAMPDIFF(YEAR, birth, CURDATE()) AS 나이,
+  TIMESTAMPDIFF(YEAR, birth, CURDATE()) AS 나이,
 	-- 점수 (소수 1자리 반올림, Null -> 0)
-    ROUND(score, 1) AS 점수,
+  -- COALESCE(ROUND(score, 1), 0) AS 점수,
+  IF(score IS NULL, ROUND(score, 1), 0) AS 점수,
 	-- 등급 (A >= 90 / B >= 80 / C >= 70 / D)
     CASE
 		WHEN score >= 90 THEN 'A'
