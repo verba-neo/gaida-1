@@ -1,0 +1,302 @@
+[
+  {
+    "customer_id": "C001",
+    "customer_name": "김민수",
+    "customer_type": "VIP",
+    "join_date": "2023-04-25"
+  },
+  {
+    "customer_id": "C002",
+    "customer_name": "이지은",
+    "customer_type": "개인",
+    "join_date": "2023-10-09"
+  },
+  {
+    "customer_id": "C003",
+    "customer_name": "박서준",
+    "customer_type": "개인",
+    "join_date": "2023-08-17"
+  },
+  {
+    "customer_id": "C004",
+    "customer_name": "최유진",
+    "customer_type": "개인",
+    "join_date": "2023-04-15"
+  },
+  {
+    "customer_id": "C005",
+    "customer_name": "정재현",
+    "customer_type": "VIP",
+    "join_date": "2024-07-12"
+  },
+  {
+    "customer_id": "C006",
+    "customer_name": "한소희",
+    "customer_type": "개인",
+    "join_date": "2024-08-27"
+  },
+  {
+    "customer_id": "C007",
+    "customer_name": "윤도현",
+    "customer_type": "기업",
+    "join_date": "2023-02-02"
+  },
+  {
+    "customer_id": "C008",
+    "customer_name": "강미나",
+    "customer_type": "개인",
+    "join_date": "2023-04-06"
+  },
+  {
+    "customer_id": "C009",
+    "customer_name": "조현우",
+    "customer_type": "개인",
+    "join_date": "2023-08-27"
+  },
+  {
+    "customer_id": "C010",
+    "customer_name": "신예은",
+    "customer_type": "VIP",
+    "join_date": "2024-09-08"
+  },
+  {
+    "customer_id": "C011",
+    "customer_name": "임태호",
+    "customer_type": "개인",
+    "join_date": "2024-07-28"
+  },
+  {
+    "customer_id": "C012",
+    "customer_name": "오수진",
+    "customer_type": "개인",
+    "join_date": "2024-10-27"
+  },
+  {
+    "customer_id": "C013",
+    "customer_name": "배준혁",
+    "customer_type": "VIP",
+    "join_date": "2024-07-12"
+  },
+  {
+    "customer_id": "C014",
+    "customer_name": "송하늘",
+    "customer_type": "기업",
+    "join_date": "2023-08-14"
+  },
+  {
+    "customer_id": "C015",
+    "customer_name": "노지훈",
+    "customer_type": "기업",
+    "join_date": "2024-08-26"
+  },
+  {
+    "customer_id": "C016",
+    "customer_name": "홍서연",
+    "customer_type": "기업",
+    "join_date": "2023-01-07"
+  },
+  {
+    "customer_id": "C017",
+    "customer_name": "서민재",
+    "customer_type": "개인",
+    "join_date": "2024-03-08"
+  },
+  {
+    "customer_id": "C018",
+    "customer_name": "김다은",
+    "customer_type": "기업",
+    "join_date": "2023-10-12"
+  },
+  {
+    "customer_id": "C019",
+    "customer_name": "이준호",
+    "customer_type": "개인",
+    "join_date": "2023-08-09"
+  },
+  {
+    "customer_id": "C020",
+    "customer_name": "박지영",
+    "customer_type": "기업",
+    "join_date": "2023-04-15"
+  },
+  {
+    "customer_id": "C021",
+    "customer_name": "최민석",
+    "customer_type": "개인",
+    "join_date": "2024-01-25"
+  },
+  {
+    "customer_id": "C022",
+    "customer_name": "정수아",
+    "customer_type": "개인",
+    "join_date": "2024-01-03"
+  },
+  {
+    "customer_id": "C023",
+    "customer_name": "한재원",
+    "customer_type": "기업",
+    "join_date": "2024-09-10"
+  },
+  {
+    "customer_id": "C024",
+    "customer_name": "윤채영",
+    "customer_type": "기업",
+    "join_date": "2023-02-14"
+  },
+  {
+    "customer_id": "C025",
+    "customer_name": "조성민",
+    "customer_type": "VIP",
+    "join_date": "2024-04-15"
+  },
+  {
+    "customer_id": "C026",
+    "customer_name": "신동현",
+    "customer_type": "VIP",
+    "join_date": "2023-05-08"
+  },
+  {
+    "customer_id": "C027",
+    "customer_name": "임유리",
+    "customer_type": "기업",
+    "join_date": "2023-03-22"
+  },
+  {
+    "customer_id": "C028",
+    "customer_name": "오태준",
+    "customer_type": "VIP",
+    "join_date": "2023-10-28"
+  },
+  {
+    "customer_id": "C029",
+    "customer_name": "배소영",
+    "customer_type": "VIP",
+    "join_date": "2024-09-25"
+  },
+  {
+    "customer_id": "C030",
+    "customer_name": "송민호",
+    "customer_type": "기업",
+    "join_date": "2024-08-14"
+  },
+  {
+    "customer_id": "C031",
+    "customer_name": "노예진",
+    "customer_type": "개인",
+    "join_date": "2023-03-13"
+  },
+  {
+    "customer_id": "C032",
+    "customer_name": "홍준서",
+    "customer_type": "개인",
+    "join_date": "2024-11-08"
+  },
+  {
+    "customer_id": "C033",
+    "customer_name": "서지원",
+    "customer_type": "개인",
+    "join_date": "2023-10-24"
+  },
+  {
+    "customer_id": "C034",
+    "customer_name": "김태현",
+    "customer_type": "개인",
+    "join_date": "2023-08-27"
+  },
+  {
+    "customer_id": "C035",
+    "customer_name": "이수빈",
+    "customer_type": "개인",
+    "join_date": "2024-01-25"
+  },
+  {
+    "customer_id": "C036",
+    "customer_name": "박도윤",
+    "customer_type": "기업",
+    "join_date": "2024-04-09"
+  },
+  {
+    "customer_id": "C037",
+    "customer_name": "최하은",
+    "customer_type": "VIP",
+    "join_date": "2024-01-09"
+  },
+  {
+    "customer_id": "C038",
+    "customer_name": "정우진",
+    "customer_type": "개인",
+    "join_date": "2024-01-15"
+  },
+  {
+    "customer_id": "C039",
+    "customer_name": "한지민",
+    "customer_type": "기업",
+    "join_date": "2023-08-03"
+  },
+  {
+    "customer_id": "C040",
+    "customer_name": "윤서준",
+    "customer_type": "VIP",
+    "join_date": "2023-10-01"
+  },
+  {
+    "customer_id": "C041",
+    "customer_name": "조예린",
+    "customer_type": "VIP",
+    "join_date": "2024-11-30"
+  },
+  {
+    "customer_id": "C042",
+    "customer_name": "신민재",
+    "customer_type": "VIP",
+    "join_date": "2023-03-15"
+  },
+  {
+    "customer_id": "C043",
+    "customer_name": "임하늘",
+    "customer_type": "VIP",
+    "join_date": "2024-10-12"
+  },
+  {
+    "customer_id": "C044",
+    "customer_name": "오지훈",
+    "customer_type": "개인",
+    "join_date": "2024-06-30"
+  },
+  {
+    "customer_id": "C045",
+    "customer_name": "배서연",
+    "customer_type": "VIP",
+    "join_date": "2023-09-08"
+  },
+  {
+    "customer_id": "C046",
+    "customer_name": "송태호",
+    "customer_type": "개인",
+    "join_date": "2024-04-18"
+  },
+  {
+    "customer_id": "C047",
+    "customer_name": "노수진",
+    "customer_type": "기업",
+    "join_date": "2023-10-04"
+  },
+  {
+    "customer_id": "C048",
+    "customer_name": "홍민석",
+    "customer_type": "VIP",
+    "join_date": "2024-07-24"
+  },
+  {
+    "customer_id": "C049",
+    "customer_name": "서다은",
+    "customer_type": "개인",
+    "join_date": "2023-11-29"
+  },
+  {
+    "customer_id": "C050",
+    "customer_name": "김준혁",
+    "customer_type": "개인",
+    "join_date": "2023-08-23"
+  }
+]
