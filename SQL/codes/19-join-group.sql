@@ -61,7 +61,7 @@ SELECT
         WHEN COUNT(s.id) >= 5 THEN '충성고객'
         WHEN COUNT(s.id) >= 4 THEN '일반고객'
         ELSE '신규고객'
-    END AS 고객분류,
+    END AS 고객분류
 FROM customers c
 LEFT JOIN sales s ON c.customer_id = s.customer_id
 GROUP BY c.customer_id, c.customer_name, c.customer_type, c.join_date
