@@ -61,10 +61,10 @@ GROUP BY DATE_FORMAT(order_date, '%Y-%m');
 -- 요일별 매출 패턴
 SELECT
 	DAYNAME(order_date) AS 요일,
-    DAYOFWEEK(order_date) AS 요일번호,
-    COUNT(*) AS 주문건수,
-    SUM(total_amount) AS 총매출액,
-    ROUND(AVG(total_amount)) AS 평균매출액
+  DAYOFWEEK(order_date) AS 요일번호,
+  COUNT(*) AS 주문건수,
+  SUM(total_amount) AS 총매출액,
+  ROUND(AVG(total_amount)) AS 평균매출액
 FROM sales
 GROUP BY DAYNAME(order_date), DAYOFWEEK(order_date)
 ORDER BY 총매출액 DESC;

@@ -18,8 +18,8 @@ SELECT
 	-- 나이 (TIMESTAMPDIFF 로 나이만 표시)
   TIMESTAMPDIFF(YEAR, birth, CURDATE()) AS 나이,
 	-- 점수 (소수 1자리 반올림, Null -> 0)
-  -- COALESCE(ROUND(score, 1), 0) AS 점수,
-  IF(score IS NULL, ROUND(score, 1), 0) AS 점수,
+  COALESCE(ROUND(score, 1), 0) AS 점수,
+  IF(score IS NOT NULL, ROUND(score, 1), 0) AS 점수,
 	-- 등급 (A >= 90 / B >= 80 / C >= 70 / D)
     CASE
 		WHEN score >= 90 THEN 'A'

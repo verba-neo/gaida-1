@@ -32,18 +32,21 @@ HAVING 주문건수 >= 20 AND 고객수 >= 15;
 -- 우수 영업사원 => 달 평균 매출액이 50만원이상
 SELECT
 	sales_rep AS 영업사원,
-    COUNT(*) AS 사원별판매건수,
+  COUNT(*) AS 사원별판매건수,
 	COUNT(DISTINCT customer_id) AS 사원별고객수,
-    SUM(total_amount) AS 사원별총매출,
+  SUM(total_amount) AS 사원별총매출,
     COUNT(DISTINCT DATE_FORMAT(order_date, '%Y-%m')) AS 활동개월수,
     ROUND(
 		SUM(total_amount) / COUNT(DISTINCT DATE_FORMAT(order_date, '%Y-%m'))
 	) AS 월평균매출
 FROM sales
 GROUP BY sales_rep
-HAVING 월평균매출 >= 5 * power(10, 5)
+-- HAVING 월평균매출 >= 5 * power(10, 5)
 ORDER BY 월평균매출 DESC;
 -- ORDER BY ??;
 
+
+SELECT * FROM sales
+WHERE total_amount > 1000 AND quantity > 3;
 
 
