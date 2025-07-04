@@ -65,15 +65,35 @@ INNER JOIN sales s ON c.customer_id = s.customer_id
 WHERE c.customer_type = 'VIP'
 ORDER BY s.total_amount DESC;
 
--- 문제 4: 건당 50만원 이상 주문한 기업 고객들
+-- 문제 4: 건당 50만원 이상 주문한 기업 고객들과 주문내역
+SELECT 
+  c.customer_name AS 고객명,
+  c.customer_type AS 고객유형,
+  s.product_name AS 상품명,
+  s.total_amount AS 주문금액,
+  s.order_date AS 주문일
+FROM customers c
+INNER JOIN sales s ON c.customer_id = s.customer_id
+WHERE c.customer_type = '기업' AND s.total_amount >= 500000;
+-- 고객 별 분석 GROUP BY
 
--- 문제 5: 2024년 하반기(7월~12월) 전자제품 구매 내역
+
+-- 문제 5: 2024년 하반기(7월~12월) AND 전자제품 구매 내역
+SELECT
+  *
+FROM customers c
+INNER JOIN sales s ON c.customer_id = s.customer_id
+WHERE s.category = '전자제품' AND
+  (YEAR(s.order_date) = 2024
+  AND 
+  MONTH(s.order_date) BETWEEN 7 AND 12);
+
 
 -- 문제 6: 고객별 주문 통계 (INNER JOIN) [고객명, 유형, 주문횟수, 총구매, 평균구매, 최근주문일]
 
 -- 문제 7: 모든 고객의 주문 통계 (LEFT JOIN) - 주문 없는 고객도 포함
 
--- 문제 8: 카테고리별 고객 유형 분석
+-- 문제 8: 상품 카테고리별로 구매한 고객 유형 분석
 
 -- 문제 9: 고객별 등급 분류 
 -- 활동등급(구매횟수) : [0(잠재고객) < 브론즈 < 3 <= 실버 < 5 <= 골드 < 10 <= 플래티넘]
