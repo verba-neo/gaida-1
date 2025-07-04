@@ -159,5 +159,28 @@ GROUP BY c.customer_id, c.customer_name, c.customer_type;
 -- 문제 10: 활성 고객 분석
 -- 고객상태('24-12-31' - 최종구매일) [NULL(구매없음) | 활성고객 <= 30 < 관심고객 <= 90 관심고객 < 휴면고객]별로 
 -- 고객수, 총주문건수, 총매출액, 평균주문금액 분석
-
-
+SELECT
+  고객상태,
+  COUNT(*) AS 고객수,
+  SUM(총주문건수) AS 상태별총주문건수,
+  SUM(총매출액) AS 상태별총매출액,
+  ROUND(AVG(평균주문금액)) AS 상태별평균주문금액
+FROM (
+  SELECT
+    c.customer_id,
+    c.customer_name,
+    COUNT(s.id) AS 총주문건수,
+    coalesce(SUM(total_amount), 0)AS 총매출액,
+    coalesce(ROUND(AVG(total_amount)), 0) AS 평균주문금액,
+    CASE
+      WHEN MAX(order_date) IS NULL THEN '구매없음'
+      WHEN DATEDIFF('2024-12-31', MAX(s.order_date)) <= 30 THEN '활성고객'
+      WHEN DATEDIFF('2024-12-31', MAX(s.order_date)) <= 90 THEN '관심고객'
+      ELSE '휴면고객'
+    END AS 고객상태
+    FROM customers c
+    LEFT JOIN sales s ON c.customer_id = s.customer_id
+    GROUP BY c.customer_id, c.customer_name
+) AS customer_anlysis
+GROUP BY 고객상태
+;
