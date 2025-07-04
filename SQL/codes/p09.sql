@@ -132,8 +132,32 @@ GROUP BY s.category, c.customer_type;
 -- 문제 9: 고객별 등급 분류 
 -- 활동등급(구매횟수) : [0(잠재고객) < 브론즈 < 3 <= 실버 < 5 <= 골드 < 10 <= 플래티넘]
 -- 구매등급(구매총액) : [0(신규) < 일반 <= 10만 < 우수 <= 20만 < 최우수 < 50만 <= 로얄]
+SELECT
+  c.customer_id, c.customer_name, c.customer_type,
+  COUNT(s.id) AS 구매횟수,
+  coalesce(SUM(s.total_amount), 0) AS 총구매액,
+  CASE
+    WHEN COUNT(s.id) = 0 THEN '잠재고객'
+    WHEN COUNT(s.id) >= 10 THEN '플래티넘'
+    WHEN COUNT(s.id) >= 5 THEN '골드'
+    WHEN COUNT(s.id) >= 3 THEN '실버'
+    ELSE '브론즈'
+  END AS 활동등급,
+  CASE
+    WHEN COALESCE(SUM(s.total_amount), 0) >= 5000000 THEN 'VIP+'
+    WHEN COALESCE(SUM(s.total_amount), 0) >= 2000000 THEN 'VIP'
+    WHEN COALESCE(SUM(s.total_amount), 0) >= 1000000 THEN '우수'
+    WHEN COALESCE(SUM(s.total_amount), 0) > 0 THEN '일반'
+    ELSE '신규'
+  END AS 구매등급
+FROM customers c
+LEFT JOIN sales s ON c.customer_id = s.customer_id
+GROUP BY c.customer_id, c.customer_name, c.customer_type;
+
 
 
 -- 문제 10: 활성 고객 분석
 -- 고객상태(최종구매일) [NULL(구매없음) | 활성고객 <= 30 < 관심고객 <= 90 관심고객 < 휴면고객]별로 24-12-31
 -- 고객수, 총주문건수, 총매출액, 평균주문금액 분석
+
+
