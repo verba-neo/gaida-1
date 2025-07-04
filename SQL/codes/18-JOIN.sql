@@ -1,18 +1,12 @@
--- 18-JOIN.sql
+-- 18-join.sql
 -- 고객정보 + 주문정보
 USE lecture;
 
 SELECT
   *,
   -- 지루하고 현학적임
-  (
-    SELECT customer_name FROM customers c
-    WHERE c.customer_id=s.customer_id
-  ) AS 주문고객이름,
-  (
-    SELECT customer_type FROM customers c
-    WHERE c.customer_id=s.customer_id
-  ) AS 고객등급
+  (SELECT customer_name FROM customers c WHERE c.customer_id=s.customer_id) AS 주문고객이름,
+  (SELECT customer_type FROM customers c WHERE c.customer_id=s.customer_id) AS 고객등급
 FROM sales s;
 
 -- JOIN
@@ -27,3 +21,27 @@ FROM customers c
 LEFT JOIN sales s ON c.customer_id = s.customer_id;  
 -- WHERE s.id IS NULL;  -> 한번도 주문한적 없는 사람들이 나온다;
 
+-- INNER JOIN 교집합
+SELECT
+  '1. INNER JOIN' AS 구분,
+  COUNT(*) AS 줄수,
+  COUNT(DISTINCT c.customer_id) AS 고객수
+FROM customers c
+INNER JOIN sales s ON c.customer_id = s.customer_id
+
+UNION
+-- LELT JOIN 왼쪽(FROM 뒤에 온)테이블은 무조건 다나옴
+SELECT
+  '2. LEFT JOIN' AS 구분,
+  COUNT(*) AS 줄수,
+  COUNT(DISTINCT c.customer_id) AS 고객수
+FROM customers c
+LEFT JOIN sales s ON c.customer_id = s.customer_id
+
+UNION
+
+SELECT
+  '3. 전체 고객수' AS 구분,
+  COUNT(*) AS 행수,
+  COUNT(*) AS 고객수
+FROM customers;
