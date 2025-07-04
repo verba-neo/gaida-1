@@ -83,17 +83,51 @@ SELECT
   *
 FROM customers c
 INNER JOIN sales s ON c.customer_id = s.customer_id
-WHERE s.category = '전자제품' AND
-  (YEAR(s.order_date) = 2024
+WHERE s.category = '전자제품' AND (
+  YEAR(s.order_date) = 2024
   AND 
-  MONTH(s.order_date) BETWEEN 7 AND 12);
-
+  MONTH(s.order_date) BETWEEN 7 AND 12
+);
 
 -- 문제 6: 고객별 주문 통계 (INNER JOIN) [고객명, 유형, 주문횟수, 총구매, 평균구매, 최근주문일]
+SELECT
+  c.customer_id,
+  c.customer_name,
+  c.customer_type,
+  COUNT(*) AS 주문횟수,
+  SUM(s.total_amount) AS 총구매금액,
+  AVG(s.total_amount) AS 평균구매금액,
+  MAX(s.order_date) AS 최근주문일
+FROM customers c
+INNER JOIN sales s ON c.customer_id = s.customer_id
+GROUP BY c.customer_id, c.customer_name, c.customer_type
+ORDER BY 평균구매금액 DESC;
+
 
 -- 문제 7: 모든 고객의 주문 통계 (LEFT JOIN) - 주문 없는 고객도 포함
+SELECT
+  c.customer_id,
+  c.customer_name,
+  c.customer_type,
+  c.join_date,
+  COUNT(s.id) AS 주문횟수,  -- COUNT 주의
+  COALESCE(SUM(s.total_amount), 0) AS 총구매금액,  -- NULL 값 주의
+  COALESCE(AVG(s.total_amount), 0) AS 평균구매금액,
+  COALESCE(MAX(s.total_amount), 0) AS 최대구매금액
+FROM customers c
+LEFT JOIN sales s ON c.customer_id = s.customer_id
+GROUP BY c.customer_id, c.customer_name, c.customer_type, c.join_date
+ORDER BY 총구매금액 DESC;
 
 -- 문제 8: 상품 카테고리별로 구매한 고객 유형 분석
+SELECT
+  c.customer_type AS 유형,
+  s.category AS 카테고리,
+  COUNT(*) AS 주문건수,
+  SUM(s.total_amount) AS 총매출액
+FROM customers c
+INNER JOIN sales s ON c.customer_id = s.customer_id
+GROUP BY s.category, c.customer_type;
 
 -- 문제 9: 고객별 등급 분류 
 -- 활동등급(구매횟수) : [0(잠재고객) < 브론즈 < 3 <= 실버 < 5 <= 골드 < 10 <= 플래티넘]
@@ -101,5 +135,5 @@ WHERE s.category = '전자제품' AND
 
 
 -- 문제 10: 활성 고객 분석
--- 고객상태(최종구매일) [NULL(구매없음) | 활성고객 <= 30 < 관심고객 <= 90 관심고객 < 휴면고객]별로
+-- 고객상태(최종구매일) [NULL(구매없음) | 활성고객 <= 30 < 관심고객 <= 90 관심고객 < 휴면고객]별로 24-12-31
 -- 고객수, 총주문건수, 총매출액, 평균주문금액 분석
