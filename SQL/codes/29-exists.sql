@@ -31,3 +31,16 @@ WHERE
   AND
   -- 50만원 이상
   EXISTS(SELECT 1 FROM sales s3 WHERE s3.customer_id = c.customer_id AND s3.total_amount >= 500000);
+  
+
+-- 3. 한번도 팔린적이 없는 상품 NOT EXISTS 활용 (IN으로는 복잡함)
+SELECT
+    p.product_name,
+    p.category,
+    p.selling_price,
+    '한 번도 팔리지 않은 상품' AS 상태
+FROM products p
+WHERE NOT EXISTS (
+    SELECT 1 FROM sales s WHERE s.product_name = p.product_name
+)
+ORDER BY p.category, p.selling_price DESC;
