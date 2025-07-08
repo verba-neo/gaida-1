@@ -84,23 +84,17 @@ ORDER BY indexname;
 
 -- 고유값 비율
 SELECT
-	COUNT(DISTINCT region) AS 고유지역수,
+	COUNT(DISTINCT region) AS 고유지역수,  -- 카디널리티
 	COUNT(*) AS 전체행수,
 	ROUND(COUNT(DISTINCT region) * 100 / COUNT(*), 2) AS 선택도
-FROM large_orders;  -- 0.0007%
+FROM large_orders;  -- 선택도 0.0007%
 
 SELECT
-	COUNT(DISTINCT amount) AS 고유금액수,
+	COUNT(DISTINCT amount) AS 고유금액수,  -- 카디널리티
 	COUNT(*) AS 전체행수
 FROM large_orders;  -- 선택도 99%
 
 SELECT
-	COUNT(DISTINCT customer_id) AS 고유고객수,
+	COUNT(DISTINCT customer_id) AS 고유고객수,  -- 카디널리티
 	COUNT(*) AS 전체행수
 FROM large_orders;  -- 선택도 13.6%
-
-
-
-
-
-
