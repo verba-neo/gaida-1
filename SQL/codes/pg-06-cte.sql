@@ -36,14 +36,25 @@ SELECT
 FROM orders
 WHERE amount > (SELECT AVG(amount) FROM orders);
 
--- 각 월마다 매출과, 전월
 
-WITH 
-	aaa AS (),
-	bbb AS (),
-	ccc AS ()
-SELECT 
-
+--
+WITH region_summary AS (
+	SELECT
+		c.region AS 지역명,
+		COUNT(DISTINCT c.customer_id) AS 고객수,
+		COUNT(o.order_id) AS 주문수,
+		COALESCE(AVG(o.amount), 0) AS 평균주문금액
+	FROM customers c
+	LEFT JOIN orders o ON c.customer_id=o.customer_id
+	GROUP BY c.region
+)
+SELECT
+	지역명,
+	고객수,
+	주문수,
+	ROUND(평균주문금액) AS 평균주문금액
+FROM region_summary
+ORDER BY 고객수 DESC
 
 
 
