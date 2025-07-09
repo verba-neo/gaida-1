@@ -53,8 +53,45 @@ SELECT
 	고객수,
 	주문수,
 	ROUND(평균주문금액) AS 평균주문금액
-FROM region_summary
-ORDER BY 고객수 DESC
+FROM region_summary rs
+ORDER BY 고객수 DESC;
+
+
+-- 1. 각 상품의 총 판매량과 총 매출액을 계산하세요
+-- 2. 상품 카테고리별로 그룹화하여 표시하세요
+-- 3. 각 카테고리 내에서 매출액이 높은 순서로 정렬하세요
+-- 4. 각 상품의 평균 주문 금액도 함께 표시하세요
+
+-- - 먼저 상품별 판매 통계를 CTE로 만들어보세요
+-- - products 테이블과 orders 테이블을 JOIN하세요
+-- - 카테고리별로 정렬하되, 각 카테고리 내에서는 매출액 순으로 정렬하세요
+
+WITH product_sales AS (
+	SELECT
+		p.category AS 카테고리,
+		p.product_name AS 제품명,
+		p.price AS 상품가격,
+		SUM(o.quantity) AS 총판매량,
+		SUM(o.amount) AS 총매출액,
+		COUNT(o.order_id) AS 주문건수,
+		AVG(o.amount) AS 평균주문금액
+	FROM products p
+	LEFT JOIN orders o ON p.product_id=o.product_id
+	GROUP BY p.category, p.product_name, p.price
+)
+SELECT
+	카테고리,
+	제품명,
+	총판매량,
+	총매출액,
+	ROUND(평균주문금액) AS 평균주문금액,
+	주문건수,
+	상품가격
+FROM product_sales
+ORDER BY 카테고리, 총매출액 DESC;
+
+
+
 
 
 
