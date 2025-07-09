@@ -155,6 +155,7 @@ customer_grade AS (
 	FROM customer_total ct
 	CROSS JOIN purchase_threshold pt
 )
+
 -- 4. 등급별 통계 출력
 SELECT
 	등급,
