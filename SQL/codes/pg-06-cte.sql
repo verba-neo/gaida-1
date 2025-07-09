@@ -124,9 +124,43 @@ ORDER BY ps.카테고리, ps.제품총매출액 DESC;
 -- 고객 구매금액에 따라 VIP(상위 20%) / 일반(전체평균보다 높음) / 신규(나머지) 로 나누어 등급통계를 보자.
 -- [등급, 등급별 회원수, 등급별 구매액총합, 등급별 평균 주문수]
 
-
-
-
-
-
+-- 1. 고객별 총 구매 금액 + 주문수
+WITH customer_total AS (
+	SELECT
+		customer_id,
+		SUM(amount) as 총구매액,
+		COUNT(*) AS 총주문수
+	FROM orders
+	GROUP BY customer_id
+),
+-- 2. 구매 금액 기준 계산
+purchase_threshold AS (
+	SELECT
+		AVG(총구매액) AS 일반기준,
+		-- 상위 20% 기준값 구하기
+		PERCENTILE_CONT(0.8) WITHIN GROUP (ORDER BY 총구매액) AS vip기준
+	FROM customer_total
+),
+-- 3. 고객 등급 분류
+customer_grade AS (
+	SELECT
+		ct.customer_id,
+		ct.총구매액,
+		ct.총주문수,
+		CASE 
+			WHEN ct.총구매액 >= pt.vip기준 THEN 'VIP'
+			WHEN ct.총구매액 >= pt.일반기준 THEN '일반'
+			ELSE '신규'
+		END AS 등급
+	FROM customer_total ct
+	CROSS JOIN purchase_threshold pt
+)
+-- 4. 등급별 통계 출력
+SELECT
+	등급,
+	COUNT(*) AS 등급별고객수,
+	SUM(총구매액) AS 등급별총구매액,
+	ROUND(AVG(총주문수), 2) AS 등급별평균주문수
+FROM customer_grade
+GROUP BY 등급
 
