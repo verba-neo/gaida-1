@@ -91,9 +91,38 @@ FROM product_sales
 ORDER BY 카테고리, 총매출액 DESC;
 
 
+-- 카테고리별 매출 비중 분석
+WITH product_sales AS (
+	SELECT
+		p.category AS 카테고리,
+		p.product_name AS 제품명,
+		p.price AS 상품가격,
+		SUM(o.quantity) AS 총판매량,
+		SUM(o.amount) AS 제품총매출액,
+		COUNT(o.order_id) AS 주문건수,
+		AVG(o.amount) AS 평균주문금액
+	FROM products p
+	LEFT JOIN orders o ON p.product_id=o.product_id
+	GROUP BY p.category, p.product_name, p.price
+),
+category_total AS (
+	SELECT
+		카테고리,
+		SUM(제품총매출액) AS 카테고리총매출액
+	FROM product_sales
+	GROUP BY 카테고리
+)
+SELECT
+	ps.카테고리,
+	ps.제품명,
+	ROUND(ps.제품총매출액 * 100 / ct.카테고리총매출액, 2) AS 카테고리매출비중
+FROM product_sales ps
+INNER JOIN category_total ct ON ps.카테고리=ct.카테고리
+ORDER BY ps.카테고리, ps.제품총매출액 DESC;
 
 
-
+-- 고객 구매금액에 따라 VIP(상위 20%) / 일반(전체평균보다 높음) / 신규(나머지) 로 나누어 등급통계를 보자.
+-- [등급, 등급별 회원수, 등급별 구매액총합, 등급별 평균 주문수]
 
 
 
