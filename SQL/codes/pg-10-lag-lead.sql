@@ -47,7 +47,7 @@ ORDER BY customer_id, order_date
 -- 금액변화=(이번-저번), 금액변화율
 -- 누적 구매 금액(SUM OVER)
 -- [추가]누적 평균 구매 금액 (AVG OVER)
-]
+-- ]
 
 
 
