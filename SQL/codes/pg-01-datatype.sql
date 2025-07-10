@@ -79,19 +79,3 @@ SELECT
 	location[1] AS 경도,
 	POINT(37.505027, 127.005011) <-> location AS 고터거리
 FROM datatype_demo;
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

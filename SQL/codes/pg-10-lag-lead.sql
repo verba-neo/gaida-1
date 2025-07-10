@@ -1,12 +1,7 @@
 -- pg-10-lag-lead.sql
 
--- 매일 체중 기록
 -- LAG() - 이전 값을 가져온다.
 -- 전월 대비 매출 분석
-
--- 매달 매출을 확인
--- 위 테이블에 증감률 컬럼 추가
-
 WITH monthly_sales AS (
 	SELECT
 		DATE_TRUNC('month', order_date) AS 월,
@@ -30,6 +25,39 @@ SELECT
 	END AS 증감률
 FROM compare_before
 ORDER BY 년월;
+
+
+-- 고객별 다음 구매를 예측?
+-- [고객id, 주문일, 구매액, 다음구매일, 다음구매액수]
+-- 고객별로 PARTITION 필요
+-- order by customer_id, order_date LIMIT 10;
+
+SELECT
+	customer_id,
+	order_date,
+	amount,
+	LEAD(order_date, 1) OVER (PARTITION BY customer_id ORDER BY order_date) AS 다음구매일,
+	LEAD(amount, 1) OVER (PARTITION BY customer_id ORDER BY order_date) AS 다음구매금액
+FROM orders
+WHERE customer_id='CUST-000001'
+ORDER BY customer_id, order_date
+
+-- [고객id, 주문일, 금액, 구매 순서(ROW_NUMBER),
+--	이전구매간격, 다음구매간격
+-- 금액변화=(이번-저번), 금액변화율
+-- 누적 구매 금액(SUM OVER)
+-- [추가]누적 평균 구매 금액 (AVG OVER)
+]
+
+
+
+
+
+
+
+
+
+
 
 
 
