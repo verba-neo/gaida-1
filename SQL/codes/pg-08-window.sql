@@ -79,5 +79,40 @@ WHERE r.순위 <= 10;
 -- CTE
 -- 1. 지역-사람별 "매출 데이터" 생성 [지역, 고객id, 이름, 해당 고객의 총 매출]
 -- 2. "매출데이터" 에 새로운 열(ROW_NUMBER) 추가
+-- 3. 최종 데이터 표시
+
+WITH region_sales AS (
+	SELECT
+		c.region,
+		c.customer_id,
+		c.customer_name,
+		SUM(o.amount) AS 고객별총매출
+	FROM customers c
+	INNER JOIN orders o ON c.customer_id=o.customer_id
+	GROUP BY c.region, c.customer_id, c.customer_name
+),
+ranked_by_region AS (
+	SELECT
+		region AS 지역,
+		customer_name AS 이름,
+		고객별총매출,
+		ROW_NUMBER() OVER(PARTITION BY region ORDER BY 고객별총매출 DESC) AS 지역순위
+	FROM region_sales
+)
+SELECT
+	지역,
+	이름,
+	고객별총매출,
+	지역순위
+FROM ranked_by_region
+WHERE 지역순위 < 4;  -- 1~3위
+
+
+
+
+
+
+
+
 
 
