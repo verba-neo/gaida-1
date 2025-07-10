@@ -43,7 +43,6 @@ FROM orders
 ORDER BY 최신주문순서
 LIMIT 20;
 
-
 -- 7월 매출 TOP 3 고객 찾기
 -- [이름, (해당고객)7월구매액, 순위]
 -- CTE
@@ -73,8 +72,6 @@ SELECT
 FROM ranking r
 INNER JOIN customers c ON r.customer_id=c.customer_id
 WHERE r.순위 <= 10;
-
-
 
 
 -- 각 지역에서 총구매액 1위 고객 => ROW_NUMBER() 로 숫자를 매기고, 이 컬럼의 값이 1인 사람
