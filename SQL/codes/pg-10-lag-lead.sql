@@ -91,19 +91,3 @@ SELECT
 	END AS 고객단계
 FROM customer_orders
 ORDER BY customer_id, order_date;
-	
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-

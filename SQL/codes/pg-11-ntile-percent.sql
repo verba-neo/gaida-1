@@ -33,6 +33,7 @@ SELECT
 FROM customer_grade cg
 INNER JOIN customers c ON cg.customer_id=c.customer_id;
 
+
 -- PERCNET_RANK()
 SELECT
 	product_name,
@@ -47,6 +48,7 @@ SELECT
 		ELSE '저가(하위30%)'
 	END 가격등급
 FROM products;
+
 
 -- 카테고리별 처음등장/마지막등장 (파티션의 처음/마지막을 찾는 윈도우함수)
 SELECT
