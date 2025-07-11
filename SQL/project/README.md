@@ -1,4 +1,4 @@
-# Chinook DB SQL 분석 문제 모음
+# SQL mini project
 
 ## 프로젝트 준비
 1. pgAdmin 에서 새로운 DB(`project`) 생성(Datatbases 우클릭 -> Create)
