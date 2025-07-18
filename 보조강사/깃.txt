@@ -1,0 +1,68 @@
+1. 내가 하고싶은게 무엇인가?
+
+local(집)에서 git으로 관리하는 디렉토리를
+local(회사)등 여러군데에서 같이 사용하고 싶다.
+
+매개체 : 인터넷 (github)
+
+local(집)에서 git으로 관리하는 디렉토리를
+github를 통해 관리하면서
+local(회사)등 여러군데에서 같이 사용하고 싶다.
+
+
+강사가 관리하는 파일들을
+인터넷을 통해
+교육생들에게 배포하고 싶다.
+
+1. 강사는 파일들을 관리해야한다. 깃을 사용할꺼다.
+
+git init
+for ~
+	git add .
+	git commit -m 'message'
+
+2. 인터넷으로 관리할꺼다 -> github라는 서비스를 활용.
+git을 업로드 하기 위해서는 '어디다가 올리지'가 필요함
+-> git remote add origin {url}
+
+3. 업로드한다
+git push 어디다가 무엇을
+git push origin main
+
+git push -u origin main -> 나의 "어디다가 무엇을"은 항상 origin main 이야.
+다음부터는
+git push
+
+위까지는 강사의 일
+---
+아래는 교육생을 일
+
+원격이랑 최초 연결
+git remote add ~~ <-> git clone
+
+연결 된 상태에서 .git 전달
+git push <-> git pull
+
+
+git clone {url}
+
+-> git pull 
+강사가 push한 .git이 최신화된다.
+(여러분들이 강사 컴퓨터에다가 push 시도할까봐)
+(여러분들이 강사 파일을 건들고나서 pull할 때) -> conflict!
+
+! 새로 클론받고 싶을 때.
+1. 폴더를 새로 만든다.
+2. 폴더에 들어간다.
+3. 해당 폴더에서 bash 또는 terminal 연다. 
+4. git clone {url} .
+	"." 까지 포함해서.
+=> 새로 만든 폴더 그 자체가 .git으로 관리된다.
+
+
+
+
+
+
+
+
