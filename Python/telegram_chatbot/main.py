@@ -22,8 +22,9 @@ def hi():
 
 @app.get('/lotto')
 def lotto():
+    numbers = random.sample(range(1, 46), 6)
     return {
-        'numbers': random.sample(range(1, 46), 6)
+        'numbers': numbers
     }
 
 
