@@ -1,5 +1,5 @@
 # .gitignore
 namsan.csv
-
+*.csv
 # API Key 적어놓는 파일
 .env
