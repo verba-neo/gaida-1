@@ -1,0 +1,42 @@
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Virtual Environments
+env/
+venv/
+.venv/
+
+# Environment
+.env
+*.env.*
+
+# IDEs
+.idea/
+.vscode/
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# LangChain / Caches
+# Add local vector stores, databases, or cache files here
+.cache/
+*.sqlite3
+*.db
