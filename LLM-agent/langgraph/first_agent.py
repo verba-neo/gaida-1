@@ -69,5 +69,7 @@ builder.add_edge("tools", "assistant")
 # Compile graph
 
 # 메모리 추가
-memory = MemorySaver()
-graph = builder.compile(checkpointer=memory)
+# memory = MemorySaver()
+# graph = builder.compile(checkpointer=memory)
+
+graph = builder.compile()
