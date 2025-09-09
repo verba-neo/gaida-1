@@ -1,15 +1,19 @@
-from bs4.filter import SoupStrainer  # pip install beautifulsoup4
+# 12_langgraph_rag.ipynb 파일 총 정리 본
+from bs4.filter import SoupStrainer
+
+from langchain_core.tools import tool
+from langchain_core.messages import SystemMessage
 from langchain_community.document_loaders import WebBaseLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_openai import OpenAIEmbeddings
 from langchain_pinecone import PineconeVectorStore
 from langchain_openai import ChatOpenAI
-from langchain_core.messages import SystemMessage
+
 from langgraph.prebuilt import ToolNode, tools_condition
 from langgraph.graph import MessagesState, StateGraph, START, END
 from langgraph.checkpoint.memory import MemorySaver
 
-
+###################### RAG 사전작업 ######################
 loader = WebBaseLoader(
     web_paths=('https://lilianweng.github.io/posts/2023-06-23-agent/', ),
     bs_kwargs={
@@ -26,8 +30,7 @@ embedding = OpenAIEmbeddings(model='text-embedding-3-small')  # small <-> large
 index_name = 'gaida-1st'
 vectorstore = PineconeVectorStore.from_existing_index(index_name=index_name, embedding=embedding)
 
-from langchain_core.tools import tool
-
+###################### Tool 정의 ######################
 @tool(response_format='content_and_artifact')  # 2개를 return 한다
 def retrieve(query: str):
     """Retrieve information related to a query
@@ -45,7 +48,7 @@ def retrieve(query: str):
 
 llm = ChatOpenAI(model='gpt-4.1', temperature=0)
 
-# Node
+###################### 그래프 Node 생성 ######################
 def query_or_respond(state: MessagesState):
     """도구 호출을 하거나, 최종 응답을 한다."""
     llm_with_tools = llm.bind_tools([retrieve])
@@ -92,7 +95,7 @@ def generate(state: MessagesState):
     response = llm.invoke(prompt)
     return {"messages": [response]}
 
-
+###################### 그래프 빌드 ######################
 builder = StateGraph(MessagesState) # 'messages'
 
 # builder.add_node('query_or_respond', query_or_respond)  # 아래와 같은 결과
@@ -110,9 +113,7 @@ builder.add_conditional_edges(
 builder.add_edge('tools', 'generate')
 builder.add_edge('generate', END)
 
-
 memory = MemorySaver()
 
-# 위에 정의된 builder 사용
 graph = builder.compile(checkpointer=memory)
 
