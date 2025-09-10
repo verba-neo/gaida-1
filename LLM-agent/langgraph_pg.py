@@ -1,4 +1,3 @@
-import re
 from langchain_community.utilities import SQLDatabase
 
 db = SQLDatabase.from_uri("postgresql://llm_readonly_user:qwer`123@localhost:5432/langgraph")

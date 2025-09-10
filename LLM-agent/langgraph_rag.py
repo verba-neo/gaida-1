@@ -37,14 +37,15 @@ def retrieve(query: str):
     Args:
         query : Query to search
     """
-    # 원본 Document list (artifact)
+    # 원본 Document list
     docs = vectorstore.similarity_search(query, k=3)
-    # 편집한 텍스트 (content)
+    # 편집한 텍스트
     result_text = '\n\n'.join(
         (f'Source: {doc.metadata}\nContent: {doc.page_content}')
         for doc in docs
     )
-    return result_text, docs
+    # content에는 LLM이 참고할 텍스트를, artifact에는 원본 Document 객체를 담아 반환
+    return {"content": result_text, "artifact": docs}
 
 llm = ChatOpenAI(model='gpt-4.1', temperature=0)
 
@@ -73,6 +74,11 @@ def generate(state: MessagesState):
             break
     tool_messages.reverse()
     docs_content = '\n\n'.join(doc.content for doc in tool_messages)
+    # 마지막 ToolMessage에서 content를 바로 추출하여 사용
+    last_tool_message = next(msg for msg in reversed(state['messages']) if msg.type == 'tool')
+    
+    docs_content = last_tool_message.content
+
     system_message_content = (
         "You are an assistant for question-answering tasks. "
         "Use the following pieces of retrieved context to answer "
