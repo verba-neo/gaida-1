@@ -6,7 +6,7 @@ from langchain_community.tools import QuerySQLDataBaseTool
 from state import State
 from db import db, table_info
 
-llm = ChatOpenAI(model='gpt-4.1', temperature=0)
+llm = ChatOpenAI(model='gpt-4o', temperature=0)
 
 
 class AnalysisOutput(TypedDict):
@@ -30,7 +30,7 @@ def question_analysis(state: State):
     
     ---
 
-    테이블 정보를 바탕으로 사용자 질문에 답변할 수 있는지를 결정하고 설명을 덧붙여라.
+    테이블 정보를 바탕으로 사용자 질문에 답변할 수 있는지를 결정하고 짧은 설명을 덧붙여라.
     """
 
     structured_llm = llm.with_structured_output(AnalysisOutput)
@@ -93,7 +93,7 @@ def execute_sql(state: State):
 def generate_answer(state: State):
     """질문에 대해 수집한 정보를 바탕으로 답변"""
     prompt = f"""
-    주어진 사용자 질문에 대해, DB에서 실행할 SQL 쿼리와 결과를 바탕으로 답변해.
+    주어진 사용자 질문에 대해, DB에서 실행할 SQL 쿼리와 결과를 바탕으로 간략히 답변해.
 
     Question: {state['question']}
     ---
